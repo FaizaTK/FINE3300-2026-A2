@@ -21,13 +21,13 @@ I divided the program into four main functions, each responsible for a different
 ## How to Run and Replicate the Results
 1. To download the project, click Code → Download ZIP on this GitHub repository and extract the downloaded folder.
 2. Install Python 3 and the required libraries. Make sure python, pandas, NumPy, and Matplotlib are installed. If needed, install them in the terminal using: python -m pip install pandas numpy matplotlib. The program also uses pathlib, which is included with Python and does not need to be installed separately.
-3. Keep `InflationCalculator.py` and `STATIC_INFLATIONCALC.csv` in the same extracted folder.
-4. Run the Python program. Open the extracted project folder in Visual Studio Code and run `InflationCalculator.py`. 
+3. Keep InflationCalculator.py and STATIC_INFLATIONCALC.csv in the same extracted folder.
+4. Run the Python program. Open the extracted project folder in Visual Studio Code and run InflationCalculator.py. 
 5. Enter the required inputs. The program will prompt users to enter:
    - The original price in Canadian dollars (e.g., 1,000)
    - The starting month and year in YYYY-MM format (e.g., 2001-01)
    - The ending month and year in the same format (e.g., 2025-12)
-6. View the results. The calculator displays the starting and ending CPI values, time difference in years, adjusted price, percentage change, and average annual rate of change. The program also automatically creates and saves `CPI_Inflation_Graph.png` in the project folder. The saved graph can be opened to view the CPI trends. To open the graph in Matplotlib while running the program, remove the # before plt.show() in Part 3 of the code.
+6. View the results. The calculator displays the starting and ending CPI values, time difference in years, adjusted price, percentage change, and average annual rate of change. The program also automatically creates and saves CPI_Inflation_Graph.png in the project folder. The saved graph can be opened to view the CPI trends. To open the graph in Matplotlib while running the program, remove the # before plt.show() in Part 3 of the code.
 Please Note: The calculator uses the CPI data included in this repository, covering January 1914 to September 2026. Both selected dates must be available in the dataset.
 
 ## How to Modify the Project
@@ -41,23 +41,31 @@ The graph shows that the CPI has increased substantially over time, from 6.0 in 
 
 ## Sample Calculator Output
 For an original price of CAD $1,000, comparing January 2001 with December 2025:
-```
-Enter the original price (CAD): 1000
-Enter the starting month and year (YYYY-MM): 2001-01
-Enter the ending month and year (YYYY-MM): 2025-12
-Starting CPI: 96.3
-Ending CPI: 165.0
-Difference in years: 24.92
-Adjusted price: CAD $1,713.40
-Percentage change: 71.34%
-Average Annual Rate Of Change: 2.18%
-```
+
+**Enter the original price (CAD): 1000**
+
+**Enter the starting month and year (YYYY-MM): 2001-01**
+
+**Enter the ending month and year (YYYY-MM): 2025-12**
+
+**Starting CPI: 96.3**
+
+**Ending CPI: 165.0**
+
+**Difference in years: 24.92**
+
+**Adjusted price: CAD $1,713.40**
+
+**Percentage change: 71.34%**
+
+**Average Annual Rate Of Change: 2.18%**
+
 The CPI-adjusted price is calculated using the ratio of the ending CPI to the starting CPI. The average annual rate also accounts for the number of months between the selected dates.
 
 ## Data Preparation and Limitations
 - The Bank of Canada CSV has information above the actual observations, so skiprows=8 is used to read the table correctly.
 - While checking the monthly dates, I found repeated entries for April 1927 and April 1932. The two April 1927 entries were identical (9.0), but the April 1932 entries differed (7.6 on 1932-04-01 and 7.4 on 1932-04-30). I used drop_duplicates() to keep the first entry for each month (so 7.6 for April 1932), which leaves one observation per month and makes the 12-month comparison work correctly.
-- pathlib is used to locate the CSV and save the graph relative to the Python file. This helps the program work even if it is run from a different working directory.
+- Pathlib is used to locate the CSV and save the graph relative to the Python file. This helps the program work even if it is run from a different working directory.
 - The calculator checks for common invalid inputs, including text or negative prices and dates not found in the dataset. It accepts commas and spaces in prices, but does not check whether commas are placed correctly or reject special numerical values.
 - Results depend on the data in the included CSV file, which ends in September 2026 and the calculator is not connected to a live data feed.
 - The first 12 months have no year-over-year percentage change because the dataset does not contain the preceding year for comparison.
